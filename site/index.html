@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An evidence hearing for a real decision. Compare options and cross-examine the cited claims."><title>ThinkCouncil</title>
+<link rel="stylesheet" href="style.css"><script type="module" src="ui.mjs"></script></head>
+<body>
+<a class="skip" href="#workspace">Skip to decision form</a>
+<header class="bar"><a class="brand" href="./">ThinkCouncil<span>.</span></a><nav aria-label="Primary"><a href="#methods">Methods</a><a href="https://github.com/hengyuhang61-creator/thinkcouncil">GitHub ↗</a></nav></header>
+<main>
+<section class="intro"><div><p class="kicker">Evidence hearing</p><h1>Put your decision to the test.</h1></div><div><p>Bring a question, two options and the evidence you trust. See which claims hold up under three different methods.</p><p class="fine">Methods are editorial adaptations. They do not speak for any real person. Your entries stay in this tab.</p></div></section>
+<div id="workspace" class="workspace">
+<form id="docket">
+<h2>Decision docket</h2>
+<label>Question<textarea name="question" required maxlength="500" rows="2"></textarea></label>
+<div class="options"><label>Option A<input name="a" required maxlength="200"></label><label>Option B<input name="b" required maxlength="200"></label></div>
+<fieldset><legend>Evidence</legend><p class="fine">Add a citation or describe the basis for every claim. Mark uncertain claims as hypotheses.</p><div id="rows"></div></fieldset>
+<div class="actions"><button type="button" id="add">Add evidence</button><button type="button" id="example">Load example</button><button type="submit" class="primary">Review docket</button></div>
+<output id="error" aria-live="polite"></output>
+</form>
+<section id="review" aria-labelledby="review-title"><h2 id="review-title" tabindex="-1">Council review</h2>
+<output id="decision" aria-live="polite"></output><p id="summary"></p>
+<div class="lenses">
+<section><h3>1. Compare alternatives</h3><p id="alternatives"></p></section>
+<section><h3>2. Invite a counterexample</h3><p id="challenge"></p></section>
+<section><h3>3. Trace the claim</h3><p id="provenance"></p></section>
+</div><h3>Evidence references</h3><ol id="citations"></ol>
+</section>
+</div>
+<section id="methods"><h2>Where the methods came from</h2>
+<p><strong>Compare alternatives.</strong> The Houbolt case supplies a historical example of comparing mission modes with different operating risks. The questions here are the project’s adaptation. <a href="https://ntrs.nasa.gov/citations/19960014824">NASA history monograph</a></p>
+<p><strong>Invite a counterexample.</strong> Bacon describes how observations against a favored belief can be ignored. Here the method asks what evidence could change a decision. <a href="https://en.wikisource.org/wiki/Novum_Organum/Book_I_(Spedding)">Novum Organum, Book I, aphorism 46</a></p>
+<p><strong>Trace the claim.</strong> A locally developed evidence-recording method card asks for basis, date and invalidation conditions. Its effectiveness remains a hypothesis. <a href="https://github.com/hengyuhang61-creator/thinkcouncil/blob/v0.1.0/SOURCES.md">Method definitions and limits</a></p></section>
+<noscript>ThinkCouncil’s interactive review uses JavaScript. The method descriptions are available above.</noscript>
+</main>
+<footer><span>ThinkCouncil</span><a href="https://github.com/hengyuhang61-creator/thinkcouncil/issues/new">Report an issue ↗</a></footer>
+<template id="row"><div class="evidence"><label>Claim<input name="claim" required maxlength="350"></label><label>Source or basis<input name="source" required maxlength="500"></label><div class="row-controls"><label>Type<select name="type"></select></label><label>Effect<select name="role"></select></label><button type="button" class="remove">Remove</button></div></div></template>
+</body></html>
