@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: node --test checks.test.mjs
+      - run: node --test checks.test.mjs council.test.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

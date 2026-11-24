@@ -1,0 +1,18 @@
+.hearing { align-items:start; grid-template-columns:minmax(0, .8fr) minmax(0, 1.2fr); }
+.hearing form textarea { resize:vertical; }
+.hearing small { display:block; margin:.2rem 0 .45rem; font-weight:400; }
+.hearing #status { display:block; margin:.65rem 0; }
+.hearing #result { min-width:0; overflow-wrap:anywhere; }
+.hearing #outcome > section { margin-top:1.6rem; }
+.hearing #outcome .verdict { padding:1rem 1.2rem; background:#e9f7ee; border-left:4px solid #16724a; border-radius:4px; }
+.hearing #outcome h3 { margin-bottom:.45rem; }
+.hearing #outcome h4 { margin:.9rem 0 .15rem; }
+.hearing #outcome p { margin:.25rem 0 .65rem; }
+.hearing #outcome details { padding:.65rem 0; border-bottom:1px solid #d9dfdc; }
+.hearing #outcome summary { cursor:pointer; font-weight:700; }
+.method-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%, 215px), 1fr)); gap:1rem; }
+.method-list article { padding:1rem; border:1px solid #d9dfdc; border-radius:.65rem; }
+.method-list h3 { margin:.15rem 0; }
+@media(max-width:850px){.hearing{grid-template-columns:1fr;}}
+@media(max-width:420px){.bar nav{flex-wrap:wrap; gap:.45rem;}}
+.hearing form label + label { margin-top:.7rem; }.hearing .actions{margin-top:.7rem;}.hearing #result{background:#fffcf4;border:1px solid var(--line);border-top:4px solid #16724a;padding:clamp(12px,2vw,19px);} #methods{max-width:none;}

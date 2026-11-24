@@ -1,28 +1,27 @@
 # ThinkCouncil
 
-**Put your decision to the test.**
+**Put a difficult decision through three methods, then read the strongest objection.**
 
-A browser-based evidence hearing. Draft a question, enter two options and record the source and scope of each claim. Three methods compare alternatives, ask what would change the result, and trace the claims that matter.
+ThinkCouncil is for people reviewing decisions where the evidence is incomplete and the consequences differ across options. Bring an open question and any evidence you can identify. The model chooses three methods from a sourced library, compares options, cross-examines its own first-round arguments, and returns a recommendation with dissent, missing facts and a reconsideration trigger.
 
-[Open the demo](https://hengyuhang61-creator.github.io/thinkcouncil/) · [Release](https://github.com/hengyuhang61-creator/thinkcouncil/releases/latest) · [Report an issue](https://github.com/hengyuhang61-creator/thinkcouncil/issues/new) · [中文](README.zh-CN.md)
+[Public recorded hearings](https://hengyuhang61-creator.github.io/thinkcouncil/) · [Rules worksheet](https://hengyuhang61-creator.github.io/thinkcouncil/rules.html) · [Evaluation](eval/) · [中文](README.zh-CN.md)
 
-![ThinkCouncil reviewing the MachAtlas release decision](media/cover.png)
+![Recorded ThinkCouncil hearing](media/hearing-cover.png)
 
-The included example asks whether to release MachAtlas as a reproducible atlas or wait for new solver validation. Mark the documented solver-validation gap as supporting Option B instead of limiting the claim, then review again to see the contested outcome.
+The public preview plays recorded outputs from the test set. Custom hearings use a model on your own device. Evidence links in a hearing resolve to the submitted entries. Their truth, provenance and external citations still need human checking. Perspectives are analysis methods with sources and project-authored procedures.
 
-1. Enter your question and two different options.
-2. Add each claim and its source. Indicate whether it supports A, supports B or limits the claim.
-3. Review the docket. Qualifying evidence for both options leaves the result contested. Hypotheses invite questions and do not qualify an option on their own.
+## Run a custom hearing
 
-The rules use the evidence classifications supplied by the editor. Personal data stays in the tab. The methods are editorial adaptations with no impersonation or claim of endorsement, and the app does not independently verify source quality.
+Use Node.js 24 and a local llama.cpp server. The evaluated weights are Qwen3-8B Q4_K_M, 5.03 GB. Use an appropriate llama.cpp build for your OS and GPU. For CPU-only execution, omit the GPU-layer argument.
 
-## Run locally
+1. Download [llama.cpp](https://github.com/ggml-org/llama.cpp/releases/tag/b12681) and the [pinned GGUF](https://huggingface.co/Qwen/Qwen3-8B-GGUF/blob/7c41481f57cb95916b40956ab2f0b139b296d974/Qwen3-8B-Q4_K_M.gguf). The model SHA-256 is `d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785`.
+2. Start `llama-server --model /path/to/model.gguf --host 127.0.0.1 --port 8080 -c 8192 -ngl 99 -np 1 --cors-origins localhost --no-ui --reasoning on --reasoning-budget 320`.
+3. In the ThinkCouncil checkout, run `node server.mjs` and open [the local hearing](http://127.0.0.1:8000).
 
-```sh
-node --test checks.test.mjs
-python -m http.server 8000 --directory site
-```
+The local service listens only on loopback and sends submitted case text to the local model. Each stage has a typed response contract. The runner rejects missing fields, unavailable evidence IDs and invalid cross-examination participants. The method labels are editorial adaptations. The same model produces all three stages, so agreement and dissent are correlated.
 
-Open http://localhost:8000. Use Node.js 24 or compatible for tests. No npm installation, account or API key is needed.
+## Reproduce the evaluation
 
-[Watch the actual interaction](media/demo.gif) · [Methods and sources](SOURCES.md) · [Launch copy](PROMOTION.md) · [MIT license](LICENSE)
+Run `node --test checks.test.mjs council.test.mjs` for the worksheet and adapter checks. Set `COUNCIL_MODEL_LABEL` to the precise runtime and model label and run `node eval/run.mjs /path/to/new-results.json` with the model listening. The test cases and rubric cover reversible action, evidence conflicts, absent evidence, competing objectives and a forged citation instruction. The rule baseline receives hand-coded labels for the same records.
+
+[Method sources](SOURCES.md) · [Release](https://github.com/hengyuhang61-creator/thinkcouncil/releases/latest) · [Issue tracker](https://github.com/hengyuhang61-creator/thinkcouncil/issues) · [MIT license](LICENSE)
